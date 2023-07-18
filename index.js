@@ -22,6 +22,7 @@ app.post("/encrypt", (req, res) => {
     const encryptedData = encryptData(data);
     res.send({ encryptedData });
   } catch (error) {
+    console.log(error)
     res.send("Error occurred");
   }
 });
@@ -39,6 +40,7 @@ app.post("/decrypt", (req, res) => {
     const decryptedData = decryptData(encryptedData);
     res.send(decryptedData);
   } catch (error) {
+    console.log(error)
     res.send("Error occurred");
   }
 });
