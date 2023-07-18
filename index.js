@@ -23,7 +23,7 @@ app.post("/encrypt", (req, res) => {
     res.send({ encryptedData });
   } catch (error) {
     console.log(error)
-    res.send("Error occurred");
+    res.send("Error occurred", error);
   }
 });
 
