@@ -137,7 +137,19 @@ app.post("/decrypt", (req, res) => {
     }
     const encryptedData = JSON.stringify(req.body.vehicleEncryptedData);
     const decryptedData = decryptData(encryptedData);
-    res.send(decryptedData);
+   let givenVin = JSON.parse(decryptedData);
+    let result;
+    if (givenVin.vin) {
+      let finalData = DB_MOCKUP.filter((elem) => elem.vinActual === givenVin.vin);
+
+      if (finalData.length) {
+        result = finalData[0].chargingParameters;
+      } else {
+        throw "Invalid ID";
+      }
+    }
+
+    res.send({ decryptedData, result });
   } catch (error) {
     res.send("Error occurred");
   }
